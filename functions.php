@@ -16,6 +16,7 @@ add_filter( 'locale_stylesheet_uri', 'chld_thm_cfg_locale_css' );
 
 // END ENQUEUE PARENT ACTION
 
+// CONSOLE LOG FUNCTION
 function console_log( $data ){
     echo '<script>';
     echo 'console.log('. json_encode( $data ) .')';
