@@ -13,8 +13,21 @@ if ( !function_exists( 'chld_thm_cfg_locale_css' ) ):
     }
 endif;
 add_filter( 'locale_stylesheet_uri', 'chld_thm_cfg_locale_css' );
-
 // END ENQUEUE PARENT ACTION
+
+// MANTENANCE MODE
+// Activate WordPress Maintenance Mode
+// function aulas_maintenance_mode(){
+
+//     if(!current_user_can('edit_themes') || !is_user_logged_in()){
+
+//     wp_die('<h1 style="color:red">Aulas CIMNE Website under Maintenance</h1><br />We are performing scheduled maintenance. We will be back on-line shortly!');
+
+//     }
+
+// }
+// add_action('get_header', 'aulas_maintenance_mode');
+// END MANTENANCE MODE
 
 // CONSOLE LOG FUNCTION
 function console_log( $data ){
