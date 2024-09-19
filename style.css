@@ -105,13 +105,43 @@ h5, .intro {
   font-size: 1.5rem;
   line-height: 1.75rem;
 }
+
+/* Dos columnas en mobile */
+@media only screen and (max-width: 768px) {
+  .three-columns .et_pb_column {
+  width: 33%!important;
+}
+}
+
+@media only screen and (max-width: 768px) {
+  .two-columns .et_pb_column {
+  width: 50%!important;
+}
+}
+
+
 /*----------------------------------------  FORMAS  ----------------------------------------*/
 
 /* Flechas */
 
+/* [class*="icono-cross"] {
+  position: absolute;
+  border: #fff solid 1px;
+  height: 32px;
+  top: 16px;
+  left: 32px;
+  
+}
+[class*="icono-cross"]::after {
+  position: absolute;
+  border: #fff solid 1px;
+  width: 32px;
+  top: 15px;
+  left: -16px;
+}
+
 
 [class*="icono-arrow"] {
-  /* cursor: pointer; */
   position: absolute;
   display: inline-block;
   vertical-align: middle;
@@ -151,23 +181,56 @@ h5, .intro {
 
 .icono-arrow-down{
     transform: rotate(135deg);
-}
+} */
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   [class*="icono-arrow"]{
-    position: relative;
-    /* top: 0;
-    right: 0;
-    left: 40px; */
+    position: absolute;
   }
   [class*="icono-arrow"]:before{
     width: 32px;
   }
+} */
+
+/* Rectangulo */
+.rectangle {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 120px;           
+  height: 48px;         
+  background: #fff;        
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+.rectangle-div {
+  position: relative;
+  width: 128px;           
+  height: 48px;         
+  background: #fff;        
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+span.rectangle-text,
+.rectangle-text p {
+  color: #444444;
+  border-top: #02A0A5 solid 1px;
+  text-transform: capitalize;
+  font-style: italic;
+  font-family: 'Lora', Times, serif;
+}
+.rectangle-text.rectangle-text-orange p{
+  border-top: #F3921A solid 1px;
 }
 
-
 /* Cuadrado */
-.cuadrado {
+/* .cuadrado {
   position: absolute;
   bottom: -12px;
   right: -12px;
@@ -175,11 +238,27 @@ h5, .intro {
   height: 64px;         
   background: #02A0A5;        
   z-index: 90;
-}
-.cuadrado:hover {
+} */
+ 
+/* .cuadrado:hover, */
+.square-form-img:hover {
   cursor: pointer;
   animation: pulse 1s infinite;
   transition: .3s;
+}
+/* .cuadrado-blue {
+  background: #004996;
+} */
+.square-form-img {
+  position: absolute !important;
+  bottom: -12px;
+  right: -12px;
+}
+@media (max-width: 768px) {
+  .square-form-img {
+    width: 48px;
+    height: 48px;
+  }
 }
 /* animación pulse */
 @keyframes pulse {
@@ -208,7 +287,8 @@ h5, .intro {
   font-weight: 400;
   line-height: 2rem;
 }
-.the-img-container .icono-arrow-left {
+.the-img-container .icono-arrow-left,
+.img-square-container .icono-arrow-left {
   bottom: 30px;
   right: 19px;
 }
@@ -467,6 +547,11 @@ li.menu-mobile-item-jobs {
   margin-bottom: 0 !important;
 }
 
+img.menu-mobile-arrow {
+  position: absolute;
+  max-width: 32px !important;
+}
+
 /* Flechas de menu primer nivel */
 
 li[class*="-arrow-"] {
@@ -474,24 +559,24 @@ li[class*="-arrow-"] {
   position: absolute;
 }
 li[class^="research-arrow"] {
-  top: 0.2rem;
-  left: 175px;
+  top: 0.9rem;
+  left: 125px;
 }
 li[class^="innovation-arrow"] {
-  top: 3.6rem;
-  left: 190px;
+  top: 4.2rem;
+  left: 145px;
 }
 li[class^="community-arrow"] {
-  top: 6.9rem;
-  left: 190px;
+  top: 7.6rem;
+  left: 145px;
 }
 li[class^="about-arrow"] {
-  top: 10.3rem;
-  left: 130px;
+  top: 11rem;
+  left: 95px;
 }
 li[class^="jobs-arrow"] {
-  top: 13.6rem;
-  left: 260px;
+  top: 14.3rem;
+  left: 225px;
 }
 
 /* 
@@ -502,7 +587,7 @@ li[class^="jobs-arrow"] {
 .submenu-arrow {
   position: absolute;
   top: 1rem;
-  right: 25px;
+  right: 0;
 }
 
 /* Tamaño y posición del segundo nivel de menú */
@@ -570,7 +655,25 @@ input.et_pb_menu__search-input::placeholder {
 
 }
 
+/*----------------------------------------  FOOTER  ----------------------------------------*/
+footer .footer-top .et_pb_heading {
+  margin-bottom: 20px;
+}
+footer .footer-top  .et_pb_column:not(.et-last-child) {
+  margin-bottom: 50px !important;
+}
+footer .footer-top h1 {
+  line-height: 1.5rem;
+  font-weight: 700;
+}
 
+footer .footer-top p {
+  padding: 0 0;
+}
+
+footer .footer-top .et_pb_blurb {
+  margin-bottom: 10px;
+}
 /* 
    Me quedo aquí
 */
@@ -579,9 +682,90 @@ input.et_pb_menu__search-input::placeholder {
 
 /* ---------------------------------------------  HOME ------------------------------------------------ */
 
-.video-section-text .et_pb_code_inner{
-  position: absolute;
-  left: 100px;
+
+/*
+    Banner
+*/
+
+/* Banner text */
+.video-section-text p{
+  color: #fff;
+  text-transform: uppercase;
   top: 40vh;
 }
+.video-section-text .et_pb_code_inner {
+  position: unset !important;
+}
 
+/* Banner text mobile */
+@media (max-width: 768px) {
+
+  .video-section-text p{
+    line-height: 1.9rem;
+    padding-bottom: 0.1rem !important;
+    position: relative;
+  }
+
+  .video-section-text .banner-heading-top{
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 1.9vw;
+
+  }
+  .video-section-text .banner-heading-middle{
+    font-weight: 300;
+    font-size: 1.4rem;
+    letter-spacing: 1vw;
+ 
+  }
+  .video-section-text .banner-heading-bottom{
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 1vw;
+  }
+  .banner-cuadrado-container .square-form-img {
+    bottom: 24px;
+    right: 24px;
+  }
+  /* .banner-cuadrado-container .icono-arrow-down {
+    bottom: 12px;
+  } */
+}
+
+/* Banner text desktop */
+@media (min-width: 769px) {
+
+  .video-section-text p{
+    line-height: 4rem;
+    position: absolute;
+    left: 100px;
+    top: 40vh;
+    padding-bottom: 0.1rem !important;
+    position: relative;
+  }
+  .video-section-text .banner-heading-top{
+    font-weight: 700;
+    font-size: 4rem;
+    /* letter-spacing: 1.9vw; */
+
+  }
+  .video-section-text .banner-heading-middle{
+    font-weight: 300;
+    font-size: 3rem;
+    /* letter-spacing: 1vw; */
+ 
+  }
+  .video-section-text .banner-heading-bottom{
+    font-weight: 700;
+    font-size: 2.5rem;
+    /* letter-spacing: 1vw; */
+  }
+  .banner-cuadrado-container .square-form-img {
+    bottom: 48px;
+    right: 40%;
+  }
+  /* .banner-cuadrado-container .icono-arrow-down {
+    bottom: 15px;
+    left: 30px;
+  } */
+}

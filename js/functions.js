@@ -20,9 +20,11 @@ jQuery(function($){
       
     // valores css de la barra de menú en función de si is home / is hover 
     const homeHoverParams = () => {
+      console.log('HOME HOVER');
       $('#main-bar').css('background-color', '#004996');
     }
     const homeNoHoverParams = () => {
+      console.log('HOME NO HOVER');
       $('#main-bar').css('position', 'relative');
       $('#main-bar').css('background-color', 'transparent');
       $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
@@ -30,6 +32,7 @@ jQuery(function($){
       $('.category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#fff', 'color': '#fff' });
     }
     const noHomeHoverParams = () => {
+      console.log('NO HOME HOVER');
       $('#main-bar').css('background-color', '#004996');
       $('.category-menu-left li.first-level>a').css('color', '#fff');
       $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
@@ -37,6 +40,7 @@ jQuery(function($){
       $('.category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#fff', 'color': '#fff' });
     }
     const noHomeNoHoverParams = () => {
+      console.log('NO HOME NO HOVER');
       $('#main-bar').css('background-color', '#fff');
       $('.category-menu-left li.first-level>a').css('color', '#004996');
       $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-color-cimne-web.png');
@@ -46,29 +50,11 @@ jQuery(function($){
 
     // controla que valores css asignar a la barra de menú
     if ( $('body').hasClass('home') ) {
-
       homeNoHoverParams();
-      $('#main-bar').hover(function () {
-
-        console.log('HOME HOVER');
-        homeHoverParams();
-      }, function () {
-
-        console.log('HOME NO HOVER');
-        homeNoHoverParams();
-      });
-
+      $('#main-bar').hover( () => homeHoverParams() , () => homeNoHoverParams() );
     }else{
       console.log(window.window.scrollY);
-      $('#main-bar').hover(function () {
-
-        console.log('NO HOME HOVER');
-        noHomeHoverParams();
-      }, function () {
-
-        console.log('NO HOMVE NO HOVER');
-        noHomeNoHoverParams();
-      });
+      $('#main-bar').hover( () => noHomeHoverParams(), () => noHomeNoHoverParams() );
     }
       
     // Controla la ocultación de la barra superior del menú y la posición de los dropdowns al hacer scroll
@@ -248,4 +234,53 @@ jQuery(function($){
 });
 
 
+
+/*
+
+  Formas y efectos en imagenes
+
+*/
+
+jQuery(function($){
+  $(document).ready(function() {
+
+    // if ( $('body').hasClass('home') ) {
+      
+      //$('.img-square-container.square-form-cross img').after('<div class="cuadrado"><i class="icono-cross"></i></div>');
+      $('.img-square-container.square-form-cross img').after('<img src="http://cimne.local/wp-content/uploads/2024/09/square-turquoise-cross-desktop.png" alt="square-cross-form" class="square-form-img">');
+      $('.img-square-container.square-form-arrow-left.blue img').after('<img src="http://cimne.local/wp-content/uploads/2024/09/square-blue-arrow-right-desktop.png" alt="square-arrow-form" class="square-form-img">');
+
+      let container = document.querySelector('#section-news');
+      let article = container.querySelectorAll('article');
+      let category, image;
+
+      console.log(article);
+
+      article.forEach(function(element) {
+        console.log(element);
+        category = getStringInClassNameList(element, 'tag');
+        console.log(category);
+        image = element.querySelector('img');
+        console.log(image);
+        $(image).before('<div class="rectangle"><span class="rectangle-text">' + category +'</span></div>');
+        
+      });
+    // }
+  });
+});
+
+
+const getStringInClassNameList = (element, keyWord) => {
+
+  let classNameList = element.className.split(' ');
+  let catchedString = '';
+  for ( value of classNameList ) {
+    if (value.includes(keyWord)) { 
+      classText = value.split('-');
+      catchedString = classText[classText.length - 1];
+      //console.log(catchedString);
+    }
+  }
+  return catchedString;
+}
 
