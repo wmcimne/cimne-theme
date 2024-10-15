@@ -1,0 +1,462 @@
+/*
+Theme Name: CIMNE
+Theme URI: https://www.cimne.com/
+Template: Divi
+Author: Cimne Webmaster
+Author URI: https://www.cimne.com/
+Description: Tema hijo para la nueva web del Centro Internacional de Métodos Numéricos en Ingeniería
+Version: 1.0.1718180136
+Updated: 2024-06-12 10:15:36
+
+*/
+
+/*
+PX ↔︎ REM conversion tables
+Pixels	REM
+1px	0.06rem
+2px	0.13rem
+3px	0.19rem
+4px	0.3rem
+5px	0.3rem
+6px	0.4rem
+8px	0.5rem
+10px	0.6rem
+12px	0.8rem
+14px	0.9rem
+15px	0.9rem
+16px	1rem
+18px	1.1rem
+20px	1.3rem
+24px	1.5rem
+25px	1.6rem
+28px	1.8rem
+32px	2rem
+36px	2rem
+40px	3rem
+44px	3rem
+48px	3rem
+50px	3rem
+56px	4rem
+64px	4rem
+72px	5rem
+75px	5rem
+80px	5rem
+90px	6rem
+100px	6rem
+
+REM	Pixels
+0.01rem	0.16px
+0.03rem	0.5px
+0.05rem	0.8px
+0.08rem	1.3px
+0.1rem	1.6px
+0.15rem	2px
+0.2rem	3px
+0.5rem	8px
+1rem	16px
+2rem	32px
+3rem	48px
+4rem	64px
+5rem	80px
+6rem	96px
+8rem	128px
+10rem	160px
+15rem	240px
+20rem	320px
+30rem	480px
+40rem	640px
+50rem	800px
+60rem	960px
+80rem	1280px
+100rem	1600px
+
+
+*/
+
+/* -------------------------------------------- Estilos generales -------------------------------------------- */
+
+body, div, span, ul, ol, li, p, a{
+
+  /* font-family: 'Poppins'; */
+  /* font-style: normal;*/
+  /* font-weight: 400; */
+  /* font-size: 1rem; */
+  /* line-height: 24px; */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #02A0A5;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+}
+h1 {
+  font-size: 4rem;
+  line-height: 4.25rem;
+}
+h2 {
+  font-size: 3rem;
+  line-height: 3.25rem;
+}
+
+h3 {
+  font-size: 2.5rem;
+  line-height: 2.75rem;
+}
+h4 {
+  font-size: 2rem;
+  line-height: 2.25rem;
+}
+h5, .intro {
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+}
+/*----------------------------------------  FORMAS  ----------------------------------------*/
+
+/* Flechas */
+
+
+[class*="icono-arrow2"] {
+  position: absolute;
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  box-sizing: border-box;
+  width: 0;
+  height: 0;
+  border-width: 3px;
+  border-style: solid;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+[class*="icono"]:after, [class*="icono"]:before {
+    content: "";
+    box-sizing: border-box;
+  
+}
+
+[class*="icono-arrow2"]:before{
+    right: 0;
+    top: -1px;
+    position: absolute;
+    height: 1px;
+    box-shadow: inset 0 0 0 32px;
+    transform: rotate(-45deg);
+    width: 26px;
+    transform-origin: right top;
+}
+
+.icono-arrow2-left {
+  bottom: 30px;
+  right: 19px;
+  transform: rotate(45deg);
+}
+
+.icono-arrow2-right{
+  bottom: 30px;
+  right: 29px;
+  transform: rotate(225deg);
+}
+
+.icono-arrow2-down{
+    transform: rotate(135deg);
+}
+
+@media (max-width: 768px) {
+  [class*="icono-arrow2"]{
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 40px;
+  }
+  [class*="icono-arrow2"]:before{
+    width: 32px;
+  }
+}
+
+
+/* Cuadrado */
+.cuadrado {
+  position: absolute;
+  bottom: -12px;
+  right: -12px;
+  width: 64px;           
+  height: 64px;         
+  background: #02A0A5;        
+  z-index: 90;
+}
+.cuadrado:hover {
+  cursor: pointer;
+  animation: pulse 1s infinite;
+  transition: .3s;
+}
+/* animación pulse */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(.9);
+  }
+    100% {
+    transform: scale(1);
+  }
+}
+/* Imagen que contiene el cuadrado */
+.the-img-container {
+  position: relative;
+  display: inline-block;
+}
+.the-image {
+  display: block;
+  width: 100%; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: auto;
+}
+
+.img-bottom-msg p{
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 2rem;
+}
+
+
+/* --------------------------------------- HEADER --------------------------------------------------------------*/
+
+/* --------------- MAIN MENU BAR -------------------*/
+
+#main-bar {
+  align-items: center;
+}
+
+
+.category-menu-right .et_pb_menu__wrap {
+  justify-content: space-around;
+
+}
+
+/* Logo a la izquierda e items de menú a la derecha */
+.top-bar .et_pb_menu__wrap {
+  -webkit-box-pack: end !important;
+  -ms-flex-pack: end !important;
+  justify-content: flex-end !important;
+
+  padding-right: 2rem;
+
+}
+@media (min-width: 768px) {
+  .et_pb_menu__logo-wrap {
+    padding-left: 2rem;
+  
+  }
+}
+
+.category-menu .et_pb_menu__search-button {
+  padding-right: 5px;
+}
+
+.category-menu .et_pb_menu__search-button a,
+.category-menu li.menu-button a,
+.category-menu .et_pb_menu__search-button {
+  border-radius: 25px;
+}
+.category-menu .et_pb_menu__search-button {
+  padding: 15px 15px;
+}
+
+.category-menu .et-menu a:hover {
+  opacity: 1;
+  -webkit-transition: none;
+  transition: none;
+}
+
+.category-menu .et_pb_menu_inner_container {
+  padding: 27px 0;
+}
+
+/* --------------- TOP BAR -------------------*/
+/* me he quedado con los estilos de la barra superior, en concreto los items de la derecha */
+.top-bar ul li {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.top-bar ul li a {
+  color: #02A0A5 !important;
+}
+
+
+
+/* --------------- DROPDOWN PANTALLA GRANDE -------------------*/
+
+/* Enable class below once you're done editing the menu */
+
+.dropdown-menu {
+  visibility: hidden;
+}
+
+.category-menu .et_pb_menu__menu .dropdown-menu {
+
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: 300ms all cubic-bezier(.4, 0, .2, 1);
+  -moz-transition: 300ms all cubic-bezier(.4, 0, .2, 1);
+  -o-transition: 300ms all cubic-bezier(.4, 0, .2, 1);
+  -ms-transition: 300ms all cubic-bezier(.4, 0, .2, 1);
+  transition: 300ms all cubic-bezier(.4, 0, .2, 1);
+  position: fixed !important;
+  top: 144px;
+  left: 0px;
+}
+
+.category-menu .et_pb_menu__menu li.first-level:hover .dropdown-menu {
+  visibility: visible;
+  opacity: 1;
+}
+
+.category-menu .et_pb_menu__menu li {
+  margin-top: 0px !important;
+}
+
+.category-menu .et_pb_menu__menu li > a {
+  margin-top: 0px !important;
+  padding: 16px 10px !important;
+}
+
+.category-menu .et_pb_menu__menu li.menu-button  > a {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.category-menu-left .et_pb_menu__menu li.first-level>a:hover {
+  
+  z-index: 1100;
+  border-bottom: 3px solid #fff;
+}
+
+.category-menu-right .et_pb_menu__menu li.first-level>a:hover {
+  
+  background-color: #fff;
+  color: #004996 !important; 
+}
+
+.category-menu .et_pb_menu__menu>nav>ul>li {
+  
+  position: static !important;
+}
+
+
+
+
+/* ------------------------------------------  MOBILE MENU --------------------------------------------- */
+
+/* Ajustes generales del menu */
+#page-container .mobile-menu,
+#mobile-menu-container {
+  background-color: #004996;
+}
+#page-container .mobile-menu li {
+  border-collapse: collapse;
+  margin-top: -1px;
+}
+#page-container .mobile-menu li.mobile-submenu-item,
+.mobile-menu ul.et_mobile_menu li,
+.mobile-menu ul.et_mobile_menu li a,
+ul.mobile-submenu {
+  border: none;
+}
+/* Fonde de los submenus*/ 
+li.mobile-submenu-divider {
+  background-color: #d9f1f2 !important;
+  padding-top: 1rem;
+}
+/* Borde de los submenus*/ 
+li.mobile-submenu-item a:last-child {
+  border-bottom: #02A0A5 2px solid !important;
+  padding-left: 0 !important;
+  margin-left: 5% !important;
+  margin-right: 5% !important;
+  padding-bottom: 0.6rem !important;
+}
+/* Fuente de los submenus */
+#page-container .mobile-menu .mobile-submenu-item a,
+#page-container .mobile-menu .mobile-submenu-lang-selector a {
+  color: #02A0A5 !important;
+  font-size: 1.1rem;
+  line-height: 1.5rem;
+  text-transform: capitalize;  
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+/* 
+Continua aquí 
+*/
+
+h3.menu-mobile-heading {
+  font-size: 2.5rem;
+  line-height: 3rem;
+  color: #fff;
+}
+.content-tab {
+  display: none;
+  position: absolute;
+  top: 10;
+
+}
+.content-tab .mobile-tab {
+  height: 100vh;
+}
+.mobile_nav [id*="mobile_menu"] {
+  height: 90vh;
+  border-top: none;
+  padding: 0 0 0 0  !important;
+}
+.et_pb_fullwidth_menu.mobile-menu .et_pb_row {
+  width: 100%;
+}
+.mobile_nav.opened .mobile_menu_bar::before {
+  content: "\51";
+}
+
+
+.mobile_nav [class*="menu-mobile-item"] {
+
+  background-color: #004996;
+}
+li.menu-mobile-item-jobs {
+  background-color: #02A0A5 !important;
+}
+.mobile_nav [class*="menu-mobile-item"] a {
+  font-size: 1.2rem !important;
+  line-height: 1.8em !important;
+  text-transform: uppercase;
+}
+
+div.mobile-submenu a {
+  color: #02A0A5 !important;
+}
+.mobile-submenu,
+.mobile-submenu ul,
+.mobile-submenu li,
+.mobile-submenu ul li,
+.mobile-submenu ul li a {
+  padding-left: 0 !important;
+}
+.mobile-submenu a:not([href]),
+.mobile-submenu-item  a:not([href]) {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+/* ---------------------------------------------  HOME ------------------------------------------------ */
+
+.video-section-text .et_pb_code_inner{
+  position: absolute;
+  left: 100px;
+  top: 40vh;
+}
+
+

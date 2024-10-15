@@ -1,0 +1,199 @@
+<div class="mobile-menu-container">
+    <div class="mobile-menu-top">
+        <ul>
+            <li class="menu-mobile-item-research"><a href="#">Research</a></li><i class="icono-arrow2-left menu-mobile-nav"></i>
+            <li class="menu-mobile-item-innovation"><a href="#">Innovation</a><i class="icono-arrow2-left menu-mobile-nav"></i></li>
+            <li class="menu-mobile-item-community"><a href="#">Community</a><i class="icono-arrow2-left menu-mobile-nav"></i></li>
+            <li class="menu-mobile-item-about"><a href="#">About</a><i class="icono-arrow2-left menu-mobile-nav"></i></li>
+            <li class="menu-mobile-item-jobs"><a href="#">Jobs & Fellowships</a><i class="icono-arrow2-left menu-mobile-nav"></i></li>           
+        </ul>
+
+    </div>
+    <div class="mobile-menu-bottom">
+        <ul>
+            <li class="menu-mobile-item-contact"><a href="#">Congres Bureau</a></li>
+            <li class="menu-mobile-item-apply"><a href="#">Bookstore</a></li>
+        </ul>
+        <ul>
+            <li class="menu-mobile-item-alert"><a href="#">Alert system</a></li>
+            <li class="menu-mobile-item-login"><a href="#">Login</a></li>
+        </ul>
+    </div>
+    <div class="mobile-menu-lang-selector">
+        <ul>
+            <li class="menu-mobile-item-ca"><a href="#">CA</a></li>
+            <li class="menu-mobile-item-es"><a href="#">ES</a></li>
+            <li class="menu-mobile-item-en"><a href="#">EN</a></li>
+        </ul>
+    </div>  
+</div>
+
+
+
+
+<div class="et_pb_module et_pb_fullwidth_menu et_pb_fullwidth_menu_0_tb_header mobile-menu et_pb_bg_layout_light  et_pb_text_align_left et_dropdown_animation_fade et_pb_fullwidth_menu_fullwidth et_pb_fullwidth_menu--with-logo et_pb_fullwidth_menu--style-left_aligned">
+
+    <div class="et_pb_row clearfix">
+        <div class="et_pb_menu__logo-wrap">
+            <div class="et_pb_menu__logo">
+                <img decoding="async" 
+                    src="http://cimne.local/wp-content/uploads/2024/07/logo-blanco-cimne.png" alt="Cimne logo"
+                    srcset="http://cimne.local/wp-content/uploads/2024/07/logo-blanco-cimne.png 574w, http://cimne.local/wp-content/uploads/2024/07/logo-blanco-cimne-480x131.png 480w"
+                    sizes="(min-width: 0px) and (max-width: 480px) 480px, (min-width: 481px) 574px, 100vw"
+                    class="wp-image-224025">
+            </div>
+        </div>
+        <div class="et_pb_menu__wrap">
+
+
+            <button type="button" class="et_pb_menu__icon et_pb_menu__search-button"></button>
+            <div class="et_mobile_nav_menu">
+                <div class="mobile_nav closed">
+                    <span class="mobile_menu_bar"></span>
+                </div>
+            </div>
+        </div>
+        <div class="et_pb_menu__search-container et_pb_menu__search-container--disabled">
+            <div class="et_pb_menu__search">
+                <form role="search" method="get" class="et_pb_menu__search-form" action="http://cimne.local/">
+                    <input type="search" class="et_pb_menu__search-input" placeholder="Search …" name="s"
+                        title="Search for:">
+                </form>
+                <button type="button" class="et_pb_menu__icon et_pb_menu__close-search-button"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ul class="cluster-group-item">
+    <li class="item-cluster-group"><a href="#">Cluster group 1</a><br><span class="item-cluster-group-subtitle">Subtitle</span></li>
+    <li class="item-cluster-group"><a href="#">Cluster group 2</a><br><span class="item-cluster-group-subtitle">Subtitle</span></li>
+</ul>
+
+<style>
+    ul.cluster-group-item {
+        list-style-image: none;
+    }
+    li.item-cluster-group a{
+        font-size: 1.3rem;
+        line-height: 1.5rem;
+        font-weight: 400;
+        color: #02A0A5;  
+    }
+    li.item-cluster-group span.item-cluster-group-subtitle {
+        font-size: 1rem;
+        line-height: 1.3rem;
+        font-weight: 400;
+        color: #444444;  
+    }
+</style>
+<script>
+/**
+* Close Divi MadMenu mobile menu on item click.
+*/
+    function dvcs_close_mobile_menu_on_item_click() {
+        // mobile menu items
+        let items = document.querySelectorAll('.dvmm_mobile__menu.dvmm_menu li a');
+        Array.from(items).forEach(item => {
+            item.addEventListener('click', function (event) {
+                // mobile menu
+                let menu = event.target.closest('.dvmm_mobile__menu');
+                if (menu.classList.contains('open')) {
+                    // click the mobile menu toggle
+                    menu.querySelector('.dvmm_mobile_menu_toggle').click();
+                }
+            })
+        })
+    }
+    document.addEventListener('DOMContentLoaded', (event) => dvcs_close_mobile_menu_on_item_click());
+</script>
+
+<style>
+    /* Tabs items buttons */
+  [id*="nav-item"] {
+    cursor: pointer;
+  }
+  
+  [id*="nav-tab"] {
+    position: absolute !important;
+    top: 0px;
+    bottom: auto;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+  
+  
+  .hide-nav-tab {
+    visibility: hidden;
+    opacity: 0;
+  }
+  
+  .show-nav-tab {
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 12;
+    position: relative !important;
+    left: 0 !important;
+    transform: translateX(0%) !important;
+  }
+  
+    
+  .nav-item-active h6 {
+   border-bottom: 2px solid #004996;
+  }
+  </style>
+  
+  
+  <script>
+      
+      jQuery(document).ready(function($) {
+    
+        $('[id$="nav-item-1"]').addClass('nav-item-active');
+        $('[id$="nav-tab-1"]').addClass('show-nav-tab');
+        $('[id*="nav-tab"]').not('[id$="nav-tab-1"]').addClass('hide-nav-tab');
+    
+        $('[id*="nav-item"]').click(function() {
+    
+              console.log($(this));
+              var selector=$(this).attr('id').replace('item', 'tab');
+              var clusterSelect =$('#' + selector);
+              var tabNameSelected = $(this).attr('id').slice(0, -7);
+              console.log(tabNameSelected);
+              
+              $('[id*="'+tabNameSelected+'-tab"]').removeClass('show-nav-tab');
+  
+              //$(tabNameSelected).removeClass('show-cluster-tab');
+              //$(tabNameSelected).addClass('hide-cluster-tab');
+              $('[id*="'+tabNameSelected+'-tab"]').addClass('hide-nav-tab');
+              clusterSelect.addClass('show-nav-tab');
+  
+              //$('[id*="cluster-item"]').removeClass('cluster-item-active');
+              $('[id*="'+tabNameSelected+'-item"]').removeClass('nav-item-active');
+              $(this).addClass('nav-item-activee');
+  
+          })
+      });
+    </script>
+
+    <input type="text" id="free-text" class="free-text">
+    <input type="dropdown" id="publication-type" class="publication-type">
+    <input type="dropdown" id="publication-year" class="publication-year">
+
+    <div class="publications-form ">
+        <div class="form-group">
+            <input id="search" class="form-control" type="text" pattern="" maxlength="70" placeholder="Type something">
+        </div>
+        <div class="form-group">
+            <select id="group" class="form-control"> 
+                <option value="" class="dropdown-header">Select group</option>
+                <option value="loren">Loren</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select id="publication" class="form-control"> 
+                <option value="" class="dropdown-header">Type of publication</option>
+                <option value="ipsum">Ipsum</option>
+            </select>
+        </div>
+    </div>
