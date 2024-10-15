@@ -637,7 +637,7 @@ footer .footer-top .et_pb_blurb {
 }
   
 .hide-nav-tab {
-  visiblity: hidden;
+  visibility : hidden;
   opacity: 0;
 }
 
