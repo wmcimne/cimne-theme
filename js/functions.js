@@ -5,7 +5,7 @@ jQuery(function($){
   ----------------------------------------------------------------*/
 
   $(function() {
-
+    //
     // Inserta los dropdowns creados a los items del menú primer nivel
     $('.dropdown-menu').each(function (i) {
       i = i + 1;

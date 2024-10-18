@@ -27,7 +27,7 @@ const getCluster = async(clusterCode) => {
     const wsURL = `https://ws.cimne.com/web_cimne/GetClusterByCode?Code=${clusterCode}`;
 
     try {
-    
+        //
         //const clusterCode = 'RC3';
         const resp = await fetch(wsURL);
         console.log(resp);

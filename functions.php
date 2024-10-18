@@ -24,7 +24,6 @@ add_filter( 'locale_stylesheet_uri', 'chld_thm_cfg_locale_css' );
 //     wp_die('<h1 style="color:red">Aulas CIMNE Website under Maintenance</h1><br />We are performing scheduled maintenance. We will be back on-line shortly!');
 
 //     }
-
 // }
 // add_action('get_header', 'aulas_maintenance_mode');
 // END MANTENANCE MODE
