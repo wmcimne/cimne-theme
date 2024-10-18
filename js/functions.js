@@ -138,6 +138,8 @@ jQuery(function($){
 
   const addRectangleFormToImg = () => {
 
+    console.log('addRectangleFormToImg');
+
     let container = document.querySelector('#section-news');
     let article = container.querySelectorAll('article');
     let category, image;
@@ -150,6 +152,8 @@ jQuery(function($){
   }
 
   const addSquareFormToImg = () => {
+    console.log('addSquareFormToImg');
+
     $('.img-square-container.square-form-cross img').after('<img src="http://cimne.local/wp-content/uploads/2024/09/square-turquoise-cross-desktop.png" alt="square-cross-form" class="square-form-img">');
     $('.img-square-container.square-form-arrow-left.blue img').after('<img src="http://cimne.local/wp-content/uploads/2024/09/square-blue-arrow-right-desktop.png" alt="square-arrow-form" class="square-form-img">');
     $('.img-square-container.square-form-arrow-left.turquoise img').after('<img src="http://cimne.local/wp-content/uploads/2024/09/square-turquoise-arrow-right-desktop.png" alt="square-arrow-form" class="square-form-img">');
@@ -157,15 +161,26 @@ jQuery(function($){
 
   const getStringInClassNameList = (element, keyWord) => {
 
+    console.log(`getStringInClassNameList: ${element} keyword: ${keyWord}`);
+
     let classNameList = element.className.split(' ');
     let catchedString = '';
+    console.log('Language is: ' + document.documentElement.lang);
 
     for (value of classNameList) {
+      
       if (value.includes(keyWord)) {
         classText = value.split('-');
-        catchedString = classText[classText.length - 1];
+        // console.log(`value: ${value} - classNameList: ${classNameList} - classText: ${classText}`);
+        // console.log('-1: ' + classText[classText.length - 1]);
+        // console.log('-2: ' + classText[classText.length - 2]);
+        
+        document.documentElement.lang.includes('en') ?  catchedString = classText[classText.length - 1] : catchedString = classText[classText.length - 2];
+        //catchedString = classText[classText.length - 1];
+        console.log(`catchedString: ${catchedString}`);
       }
     }
+    
     return catchedString;
   }
 
@@ -177,33 +192,43 @@ jQuery(function($){
   // valores css de la barra de menú en función de si es home / es hover 
   const onHoverBehaviour = {
     homeHoverParams: () => {
+      console.log('onHoverBehaviour: homeHoverParams');
+
       $('#main-bar').css('background-color', '#004996');
     },
     homeNoHoverParams: () => {
+      console.log('onHoverBehaviour: homeNoHoverParams');
+
       $('#main-bar').css('position', 'relative');
       $('#main-bar').css('background-color', 'transparent');
       $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
-      $('#menu-main-right li a').css({ 'border-color': '#fff', 'color': '#fff' });
+      $('[id^="menu-main-right"] li a').css({ 'border-color': '#fff', 'color': '#fff' });
       $('.category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#fff', 'color': '#fff' });
     },
     noHomeHoverParams: () => {
+      console.log('onHoverBehaviour: noHomeHoverParams');
+
       $('#main-bar').css('background-color', '#004996');
       $('.category-menu-left li.first-level>a').css('color', '#fff');
       $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
-      $('#menu-main-right li a').css({ 'border-color': '#fff', 'color': '#fff' });
+      $('[id^="menu-main-right"] li a').css({ 'border-color': '#fff', 'color': '#fff' });
       $('.category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#fff', 'color': '#fff' });
     },
     noHomeNoHoverParams: () => {
+      console.log('onHoverBehaviour: noHomeNoHoverParams');
+
       $('#main-bar').css('background-color', '#fff');
       $('.category-menu-left li.first-level>a').css('color', '#004996');
       $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-color-cimne-web.png');
-      $('#menu-main-right li a').css({ 'border-color': '#02A0A5', 'color': '#02A0A5' });
+      $('[id^="menu-main-right"] li a').css({ 'border-color': '#02A0A5', 'color': '#02A0A5' });
       $('.category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#004996', 'color': '#004996' });
     }
   }
 
   // posición y comportamiento de la barra y dropdowns en función de si es home o no 
   const homePositionParams = (dropdowns) => {
+
+    console.log('homePositionParams');
 
     let topBar = document.getElementById('top-bar');
     let mainBar = document.getElementById('main-bar');
@@ -218,6 +243,8 @@ jQuery(function($){
   }
 
   const noHomePositionParams = (dropdowns) => {
+
+    console.log('noHomePositionParams');
 
     let topBar = document.getElementById('top-bar');
     let mainBar = document.getElementById('main-bar');
@@ -242,7 +269,12 @@ jQuery(function($){
   
   // Update Mobile Menu Styles Features
   const mobileTabsBehaviour = {
+
+    
+
     isHomeIsOpen: () => {
+      console.log('mobileTabsBehaviour: isHomeIsOpen');
+
       $('.mobile-menu').css('position', 'fixed');
       $('#mobile-menu-container').css('background-color', '#004996');
       $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
@@ -252,11 +284,15 @@ jQuery(function($){
       $('#page-container .mobile-menu').css('background-color', '#004996');
     },
     isHomeIsNotOpen: () => {
+      console.log('mobileTabsBehaviour: isHomeIsNotOpen');
+
       $('.mobile-menu').css('position', 'relative');
       $('#mobile-menu-container').css('background-color', 'transparent');
       $('#page-container .mobile-menu').css('background-color', 'transparent');
     },
     isNotHomeIsOpen: () => {
+      console.log('mobileTabsBehaviour: isNotHomeIsOpen');
+
       $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
       $('.et_pb_fullwidth_menu_0_tb_header .et_pb_menu__icon.et_pb_menu__search-button').css('color', '#fff');
       $('.mobile-menu button.et_pb_menu__search-button ').css('border', '#fff solid 1px');
@@ -264,6 +300,8 @@ jQuery(function($){
       $('#page-container .mobile-menu').css('background-color', '#004996');
     },
     isNotHomeIsNotOpen: () => {
+      console.log('mobileTabsBehaviour: isNotHomeIsNotOpen');
+
       $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-color-cimne-web.png');
       $('.et_pb_fullwidth_menu_0_tb_header .et_pb_menu__icon.et_pb_menu__search-button').css('color', '#004996');
       $('.mobile-menu button.et_pb_menu__search-button ').css('border', '#004996 solid 1px');

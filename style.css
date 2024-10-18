@@ -371,7 +371,7 @@ body.home #main-bar .category-menu-left li.first-level>a {
   border-bottom: 3px solid #fff;
   
 }
-#menu-main-right li a {
+[id^="menu-main-right"] li a {
   color: #02A0A5;
 }
 
@@ -470,6 +470,26 @@ li.mobile-first-level-bottom-item a:last-child {
   flex-direction: row-reverse;
   flex-wrap: nowrap;
 }
+
+#mobile_menu4 > li.menu-item.wpml-ls-item.wpml-ls-menu-item {
+  display: inline-flex;
+  margin-left: 15px;
+  padding-top: 10px;
+}
+
+#mobile_menu4 > li.menu-item.wpml-ls-item.wpml-ls-menu-item > a {
+  color: #02A0A5 !important;
+}
+#mobile_menu4 > li.menu-item.wpml-ls-item.wpml-ls-menu-item.wpml-ls-current-language  > a {
+  font-weight: bold;
+}
+
+
+
+.wpml-ls-current-language {}
+
+.wpml-ls-item-ca {}
+
 
 /* Colores de background menu primer nivel */
 .mobile_nav [class*="menu-mobile-item"] {
