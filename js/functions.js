@@ -122,10 +122,42 @@ jQuery(function($){
       clusterSelect.addClass('show-nav-tab');
       $('[id*="' + tabNameSelected + '-item"]').removeClass('nav-item-active');
       $(this).addClass('nav-item-active');
-    })
+
+    });
   });
 
 
+  /*------------------------------------------------------------------------------
+    Gestiona la visibilidad de las secciones de proyectos. Navegación y filtrado
+
+    *Adaptar a otras listas como publicaciones, etc
+  -------------------------------------------------------------------------------*/
+  
+  let projectItems =  document.getElementById('project-items');
+
+  if (document.body.contains(projectItems)) {
+    
+    const allProjectItems = document.querySelectorAll('.projects-nav-item');
+
+
+    projectItems.addEventListener('click', (event) => {
+
+      if (event.target.closest('#ongoing-projects-item') && !event.target.closest('#ongoing-projects-item').classList.contains('nav-item-active')) {
+
+        allProjectItems.forEach(tab => tab.classList.toggle('nav-item-active'));
+        document.documentElement.style.setProperty('--display-ongoing-projects', 'block');
+        document.documentElement.style.setProperty('--display-finished-projects', 'none');
+      }
+      if (event.target.closest("#finished-projects-item") && !event.target.closest('#finished-projects-item').classList.contains('nav-item-active')) {
+
+        allProjectItems.forEach(tab => tab.classList.toggle('nav-item-active'));
+        document.documentElement.style.setProperty('--display-ongoing-projects', 'none');
+        document.documentElement.style.setProperty('--display-finished-projects', 'block');
+      }
+    });
+  } else {
+    console.log('projectItems not found');
+  }
 
   /*--------------------------------------------------------------
     Formas y efectos en imagenes
@@ -309,3 +341,9 @@ jQuery(function($){
     }
   }
 });
+
+
+
+
+
+

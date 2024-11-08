@@ -1,0 +1,90 @@
+
+<table class="responsive-table">
+    
+    <tbody>
+    <tr>
+         <td>Luis M. Lillo</td>
+         <td data-label="Phone: ">647810696</td>
+         <td data-label="E-mail: ">llillo@cimne.upc.edu</td>
+
+    </tr>
+    
+    <tr>
+         <td>Luis M. Lillo</td>
+         <td data-label="Phone: "></td>
+         <td data-label="E-mail: ">llillo@cimne.upc.edu</td>
+    </tr>
+    
+    <tr>
+         <td>Luis M. Lillo</td>
+         <td data-label="Phone: ">647810696</td>
+         <td data-label="E-mail: ">llillo@cimne.upc.edu</td>
+    </tr>
+    
+    <!-- Resto de las filas -->
+    </tbody>
+    
+</table>
+
+<style>
+.responsive-table {
+      width: 100%;
+      overflow-x: auto;
+}
+
+.responsive-table td {
+      padding: 8px;
+      text-align: left; 
+}
+.responsive-table td:empty:before {
+    display: none;
+}
+@media (min-width: 767px) {
+
+  .responsive-table tbody td {
+    border-bottom: 1px solid #ddd;
+  }
+  .responsive-table td::before {
+     content: attr(data-label);
+     position: relative;
+}
+}
+
+@media (max-width: 767px) {
+
+
+.responsive-table tr {
+      margin-bottom: 0.625em;
+      display: block;
+      border-bottom: 1px solid #ddd;
+}
+
+.responsive-table tr:last-child {
+
+      border-bottom: none;
+}
+.responsive-table td {
+     display: block;
+     text-align: left;
+     position: relative;
+     padding-left: 25%;
+}
+.responsive-table td:first-child {
+  padding-left: 15px;
+  text-align: left;
+
+}
+
+.responsive-table td::before {
+     content: attr(data-label);
+     position: absolute;
+     left: 0;
+     width: 50%;
+     padding-left: 15px;
+     text-align: left;
+}
+
+}
+</style>
+
+

@@ -670,7 +670,7 @@ footer .footer-top .et_pb_blurb {
   transform: translateX(0%) !important;
 }
     
-.cluster-nav-item.nav-item-active h6 {
+[id*="cluster-nav-item"].nav-item-active div {
  border-bottom: 2px solid #004996;
 }
 
@@ -751,12 +751,26 @@ footer .footer-top .et_pb_blurb {
   Clusters page
 ----------------------------------------------------------------*/
 
+:root {
+  --display-ongoing-projects: block;
+  --display-finished-projects: none;
+}
+
+.ongoing-project {
+  display: var(--display-ongoing-projects);
+}
+
+.finished-project {
+  display: var(--display-finished-projects);
+}
+
+
 /*  Clusters header  */
-ul.cluster-group-item {
+ul#cluster-groups {
   list-style-image: url('http://cimne.local/wp-content/uploads/2024/09/Line-32x16-1.png');
 }
 
-ul.cluster-group-item li {
+ul#cluster-groups li {
   margin: 0 0 0 0;
   padding: 5px 0 0 0;
 }
@@ -786,6 +800,157 @@ li.item-cluster-group span.item-cluster-group-subtitle {
   color: #02A0A5;
 }
 
+
+/* Responsive table */
+table.responsive-table,
+.responsive-table caption, 
+.responsive-table thead,
+.responsive-table tbody,
+.responsive-table tr,
+.responsive-table th,
+.responsive-table td{
+  border: none !important;
+}
+
+.responsive-table {
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.responsive-table td {
+  width: 30%;
+  padding: 5px 0 0 0 !important;
+  text-align: left;
+}
+
+.responsive-table td:empty:before {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .responsive-table td {
+    border-bottom: 1px solid #ddd !important;
+  }
+
+  .responsive-table td::before {
+    content: attr(data-label);
+    position: relative;
+  }
+}
+
+@media (max-width: 767px) {
+
+  .responsive-table tr {
+    margin-bottom: 0.625em;
+    display: block;
+    border-bottom: 1px solid #ddd !important;
+  }
+
+  .responsive-table tr:last-child {
+
+    border-bottom: none !important;
+  }
+
+  .responsive-table td {
+    width: 100%;
+    display: block;
+    text-align: left;
+    position: relative;
+    padding-left: 25% !important;
+  }
+
+  .responsive-table td:first-child {
+    padding-left: 0px !important;
+    text-align: left;
+
+  }
+
+  .responsive-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    
+    padding-left: 0px;
+    text-align: left;
+  }
+}
+td.send-email::after {
+  font-family: 'ETMODULES';
+  content: '\e010';
+  color: #000;
+} 
+
+h5.staff-heading {
+  font-weight: 700;
+  color: #004996 !important;
+  text-align: left;
+}
+
+/* Description list */
+
+.description-list .list-title span{
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #02A0A5;
+  font-weight: 700;
+}
+.description-list .list-title span:first-child{
+  text-decoration: capitalize;
+}
+.description-list .list-item {
+  display: flex;
+  align-items: center;
+}
+.description-list .list-block {
+  padding: 10px 0 10px 0;
+  border-bottom: 1px solid #D9D9D9;
+}
+.description-list .title {
+  font-size: 1.1rem;
+  color: #004996;
+  font-weight: 700;
+}
+.list-website a,
+span.list-website {
+  color: #444444 !important;
+  font-size: 18px;
+  font-weight: 600;
+}
+.description-list .list-title,
+.description-list .list-item {
+  padding-top: 5px;
+  width: 80%;
+}
+.description-list .list-title:first-child {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.list-website-mobile{
+  display: none;
+}
+@media only screen and (max-width: 768px) {
+  .description-list .list-title,
+  .description-list .list-item {
+    width: 100%;
+  }
+  .list-website-desktop {
+    display: none;
+  }
+  .list-website-mobile{
+    padding-top: 5px;
+    display: block;
+  }
+}
+
+/* Ficha de proyecto */
+.close-button {
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #02A0A5;
+  font-weight: 700;
+}
 /* Formulario de pestaña publicaciones */
 .form-control {
   width: 100%;

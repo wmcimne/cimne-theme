@@ -1,0 +1,74 @@
+// JSON para la pagina de clusters
+// getClusterByCode
+//https://ws.cimne.com/web_cimne/GetClusterByCode?Code=${clusterCode}`;
+
+{
+    "clusterId" : "RC3",
+    "clusterName" : "Computational mechanics in medical engineering and living matter",
+    "clusterCode" : "RC3", /**/
+    "groups" : [
+        {
+            "groupName" : "oren ipsum",
+            "groupCode" : "xxx"
+        }
+    ],
+    "people" : [
+        {
+            "peopleId" : "xxx",
+            "name" : "John",
+            "surname_1" : "Doe",
+            "surname_2" : "Doe",
+            "email" : "xxx@xxx",
+            "phone" : "xxx",
+            "category" : "xxx"
+        }
+    ],
+    "peopleCategories" : [
+        {
+            "category" : "xxx"
+        }
+    ],
+    "projects" : [
+        {
+            "acronym" : "xxx",
+            "title" : "xxx",
+            "code/id" : "xxx", // code o id para hacer llamada a la API y obtener la ficha completa
+            "category" : "xxx",
+            "startDate" : "xxx",
+            "endDate" : "xxx",
+            "funding" : "xxx",
+            "website" : "xxx"
+        }
+    ],
+    "projectCategories" : [
+        {
+            "category" : "xxx"
+        }
+    ]
+}
+
+// JSON para la ficha de proyecto
+// getProjectByCode
+// https://ws.cimne.com/web_cimne/GetProjectByCode?Code=${projectCode}`;
+
+{
+    "acronym" : "xxx",
+    "title" : "xxx",
+    "logo" : "url??",
+    "website" : "xxx",
+    "principalInvestigatorName" : "xxx",
+    "principalInvestigatorEmail" : "xxx",
+    "code/id" : "xxx",
+    "category" : "xxx",
+    "startDate" : "xxx",
+    "endDate" : "xxx",
+    "coordinator" : "xxx",
+    "consortiumMembers" : "xxx",
+    "program" : "xxx",
+    "subprogram" : "xxx",
+    "call" : "xxx",
+    "fundingBody" : "xxx",
+    "grant" : "xxx",
+    "abstract" : "xxx yyyy zzzz aaaaa...",
+    "otros???" : "xxx"
+}
