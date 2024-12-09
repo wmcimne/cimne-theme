@@ -1,0 +1,89 @@
+<div id="project-ficha"> 
+    <div class="project-ficha-back">
+        <div><span>Back</span></div>
+    </div>
+    <div class="project-ficha-heading">
+        <div class="left">
+            <h5 class="acronim">${acronym}</h5>
+            <p class="title">${title}</p>
+        </div>
+        <div class="right logos">
+            <img class="finac-pic" src= "data:image/jpg;base64, ${finacPic}" alt="finacial body logo">
+        </div>
+    </div>
+    <div class="project-ficha-body">
+      <div class="left">
+            <div class="profile">
+                <div class="profile-pic">
+                    <img src="data:image/jpg;base64,${profilePic}" alt="profile picture">
+                </div>
+                <div class="profile-info">
+                    <p class="category">Principal investigator</p>
+                    <p class="name">${invest_main}</p>
+                    <p class="email">${email_ip}<p>
+                </div>
+            </div>
+            <div class="abstract">
+                <p class="text">${abstract}</p>
+        		<p class="website"><span class="list-website list-website-desktop"><del>       </del><a href="${web}" target="_blank" rel="noopener"> WEBSITE</a></span></p>
+            </div>
+        </div> 
+       
+        <div class="right">
+          <details id="consortium-members" name="acordeon">
+                <summary>Consortium members</summary>
+                <ul>
+                    <li>forEach ${partners}</li>
+                </ul>
+            </details>
+            <details id="more-information" name="acordeon">
+                <summary>More information</summary>
+                <dl>
+                    <div class="list-item">
+                        <dt>Reference:</dt>
+                        <dd>${reference}</dd>
+                    </div>
+                    <div class="list-item">
+                        <dt>Start:</dt>
+                        <dd>${start_date}</dd>
+                    </div>
+                    <div class="list-item">
+                        <dt>End:</dt>
+                        <dd>${end_date}</dd>
+                    </div>
+                    <div class="list-item">
+                        <dt>Coordinator:</dt>
+                        <dd>${coordinator}</dd>
+                    </div>
+                    <div class="list-item">
+                        <dt>Program:</dt>
+                        <dd>${program}</dd>
+                    </div>
+                    <div class="list-item">
+                        <dt>Call:</dt>
+                        <dd>${call}</dd>
+                    </div>
+                    <div class="list-item">
+                        <dt>Subprogram:</dt>
+                        <dd>${subprogram}</dd>
+                    </div>
+                    <div class="list-item">
+                        <dt>Category:</dt>
+                        <dd>${category}</dd>
+                    </div>
+                    <div class="list-item">
+                        <dt>Funding body(ies):</dt>
+                        <dd>${financing_entity}</dd>
+                    </div>
+                    <div class="list-item">
+                        <dt>Grant:</dt>
+                        <dd>${grant}</dd>
+                    </div>
+                </dl>
+            </details>
+        </div>
+    </div>
+    <div class="project-ficha-extra">
+        <p class="text web_footer">${web_footer}</p>
+    </div>
+</div>

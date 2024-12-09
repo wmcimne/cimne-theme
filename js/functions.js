@@ -126,6 +126,22 @@ jQuery(function($){
     });
   });
 
+  
+  /*--------------------------------------------------------------
+    Toggle tabs: 
+  ----------------------------------------------------------------
+      - Añadir 
+          toggle-triger-xxxxx en el disparador
+          toggle-target-xxxxx en el objetivo
+  */
+
+  $(document).ready(function() {
+        $('[id*="toggle-triger"]').click(function () {
+            let selector = $(this).attr('id').replace('triger', 'target');
+            console.log('selector: ' + selector);
+            $('#'+selector).toggle("slow");
+        });		
+	});
 
   /*------------------------------------------------------------------------------
     Gestiona la visibilidad de las secciones de proyectos. Navegación y filtrado
@@ -133,31 +149,39 @@ jQuery(function($){
     *Adaptar a otras listas como publicaciones, etc
   -------------------------------------------------------------------------------*/
   
-  let projectItems =  document.getElementById('project-items');
+  let projectMenuItems =  document.getElementById('project-items');
 
-  if (document.body.contains(projectItems)) {
+  if (document.body.contains(projectMenuItems)) {
     
-    const allProjectItems = document.querySelectorAll('.projects-nav-item');
+    const navTabs = document.querySelectorAll('.projects-nav-item');
 
+    projectMenuItems.addEventListener('click', (event) => {
 
-    projectItems.addEventListener('click', (event) => {
+      let projectItems =  document.querySelectorAll('.list-block');
 
       if (event.target.closest('#ongoing-projects-item') && !event.target.closest('#ongoing-projects-item').classList.contains('nav-item-active')) {
 
-        allProjectItems.forEach(tab => tab.classList.toggle('nav-item-active'));
-        document.documentElement.style.setProperty('--display-ongoing-projects', 'block');
-        document.documentElement.style.setProperty('--display-finished-projects', 'none');
+        navTabs.forEach(tab => tab.classList.toggle('nav-item-active'));
+
+        projectItems.forEach(item => {
+          item.classList.contains('ongoing-project') ?  item.classList.remove('hide-element') : item.classList.add('hide-element');
+        });
       }
+
       if (event.target.closest("#finished-projects-item") && !event.target.closest('#finished-projects-item').classList.contains('nav-item-active')) {
 
-        allProjectItems.forEach(tab => tab.classList.toggle('nav-item-active'));
-        document.documentElement.style.setProperty('--display-ongoing-projects', 'none');
-        document.documentElement.style.setProperty('--display-finished-projects', 'block');
+        navTabs.forEach(tab => tab.classList.toggle('nav-item-active'));
+
+        projectItems.forEach(item => {
+          item.classList.contains('finished-project') ? item.classList.remove('hide-element') : item.classList.add('hide-element');
+        });
       }
     });
   } else {
-    console.log('projectItems not found');
+    console.log('projectMenuItems not found');
   }
+  
+  
 
   /*--------------------------------------------------------------
     Formas y efectos en imagenes
@@ -216,47 +240,41 @@ jQuery(function($){
     return catchedString;
   }
 
+  
+  /*--------------------------------------------------------------
+    Funcion de busqueda
+  ----------------------------------------------------------------*/
+
+  let debounceTimer; // Variable para el temporizador
+
+  $('#searchBox').on('input', function() {
+      console.log('input change');
+      clearTimeout(debounceTimer); // Cancelar el temporizador anterior
+      let $this = $(this);
+      debounceTimer = setTimeout(function() {
+          let query = $this.val().toLowerCase();
+          console.log('Búsqueda ejecutada con:', query);
+
+          // Me he quedado aquí
+          if ($('.list-block').css('display') == 'block') {
+            
+          }
+            // Acción a realizar, por ejemplo, filtrar elementos:
+            $('.list-block').each(function() {
+                let item = $(this).text().toLowerCase();
+                console.log(item.includes(query));
+                // $(this).toggle(item.includes(query));
+
+                item.includes(query) ? $(this).removeClass('hide-element') : $(this).addClass('hide-element');
+            });
+      }, 300); // Retraso de 300 ms
+  });
+
 
   /*--------------------------------------------------------------
     Funciones Auxiliares
   ----------------------------------------------------------------*/
-
-  // valores css de la barra de menú en función de si es home / es hover 
-  const onHoverBehaviour = {
-    homeHoverParams: () => {
-      console.log('onHoverBehaviour: homeHoverParams');
-
-      $('#main-bar').css('background-color', '#004996');
-    },
-    homeNoHoverParams: () => {
-      console.log('onHoverBehaviour: homeNoHoverParams');
-
-      $('#main-bar').css('position', 'relative');
-      $('#main-bar').css('background-color', 'transparent');
-      $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
-      $('[id^="menu-main-right"] li a').css({ 'border-color': '#fff', 'color': '#fff' });
-      $('.category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#fff', 'color': '#fff' });
-    },
-    noHomeHoverParams: () => {
-      console.log('onHoverBehaviour: noHomeHoverParams');
-
-      $('#main-bar').css('background-color', '#004996');
-      $('.category-menu-left li.first-level>a').css('color', '#fff');
-      $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
-      $('[id^="menu-main-right"] li a').css({ 'border-color': '#fff', 'color': '#fff' });
-      $('.category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#fff', 'color': '#fff' });
-    },
-    noHomeNoHoverParams: () => {
-      console.log('onHoverBehaviour: noHomeNoHoverParams');
-
-      $('#main-bar').css('background-color', '#fff');
-      $('.category-menu-left li.first-level>a').css('color', '#004996');
-      $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-color-cimne-web.png');
-      $('[id^="menu-main-right"] li a').css({ 'border-color': '#02A0A5', 'color': '#02A0A5' });
-      $('.category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#004996', 'color': '#004996' });
-    }
-  }
-
+  
   // posición y comportamiento de la barra y dropdowns en función de si es home o no 
   const homePositionParams = (dropdowns) => {
 
@@ -297,51 +315,73 @@ jQuery(function($){
       element.style.top = mainBarTopPosition;
     })
   }
+  
 
+  // valores css de la barra de menú en función de si es home / es hover 
+  const onHoverBehaviour = {
+    homeHoverParams: () => {
+      console.log('onHoverBehaviour: homeHoverParams');
+
+      $('#main-bar').css('background-color', '#004996');
+    },
+    homeNoHoverParams: () => {
+      console.log('onHoverBehaviour: homeNoHoverParams');
+
+      $('#main-bar').css('background-color', 'transparent');
+      $('[id^="menu-main-right"] li a').css({ 'border-color': '#fff', 'color': '#fff' });
+      $('#main-bar button.et_pb_menu__search-button').css({ 'border-color': '#fff', 'color': '#fff' });
+    },
+    noHomeHoverParams: () => {
+      console.log('onHoverBehaviour: noHomeHoverParams');
+
+      $('#main-bar').css('background-color', '#004996');
+      $('.category-menu-left li.first-level>a').css('color', '#fff');
+      $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
+      $('[id^="menu-main-right"] li a, .category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#fff', 'color': '#fff' });
+  
+    },
+    noHomeNoHoverParams: () => {
+      console.log('onHoverBehaviour: noHomeNoHoverParams');
+
+      $('#main-bar').css('background-color', '#fff');
+      $('.category-menu-left li.first-level>a').css('color', '#004996');
+      $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-color-cimne-web.png');
+      $('[id^="menu-main-right"] li a, .category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#02A0A5', 'color': '#02A0A5' });
+
+    }
+  }
   
   // Update Mobile Menu Styles Features
   const mobileTabsBehaviour = {
 
-    
+  
 
     isHomeIsOpen: () => {
       console.log('mobileTabsBehaviour: isHomeIsOpen');
-
-      $('.mobile-menu').css('position', 'fixed');
-      $('#mobile-menu-container').css('background-color', '#004996');
-      $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
-      $('.et_pb_fullwidth_menu_0_tb_header .et_pb_menu__icon.et_pb_menu__search-button').css('color', '#fff');
-      $('.mobile-menu button.et_pb_menu__search-button ').css('border', '#fff solid 1px');
-      $('.mobile_nav.opened .mobile_menu_bar::before').css('color', '#fff');
-      $('#page-container .mobile-menu').css('background-color', '#004996');
+      
+      $('#page-container .mobile-menu').css({'position' : 'fixed', 'background-color': '#004996'});
     },
     isHomeIsNotOpen: () => {
       console.log('mobileTabsBehaviour: isHomeIsNotOpen');
 
-      $('.mobile-menu').css('position', 'relative');
-      $('#mobile-menu-container').css('background-color', 'transparent');
-      $('#page-container .mobile-menu').css('background-color', 'transparent');
+      $('#page-container .mobile-menu').css({'position' : 'relative','background-color': 'transparent'});
     },
     isNotHomeIsOpen: () => {
       console.log('mobileTabsBehaviour: isNotHomeIsOpen');
 
       $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
-      $('.et_pb_fullwidth_menu_0_tb_header .et_pb_menu__icon.et_pb_menu__search-button').css('color', '#fff');
-      $('.mobile-menu button.et_pb_menu__search-button ').css('border', '#fff solid 1px');
-      $('.mobile_nav.opened .mobile_menu_bar::before').css('color', '#fff');
+      $('.mobile-menu button.et_pb_menu__search-button ').css({'border': '#fff solid 1px', 'color': '#fff'});
       $('#page-container .mobile-menu').css('background-color', '#004996');
     },
     isNotHomeIsNotOpen: () => {
       console.log('mobileTabsBehaviour: isNotHomeIsNotOpen');
 
       $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-color-cimne-web.png');
-      $('.et_pb_fullwidth_menu_0_tb_header .et_pb_menu__icon.et_pb_menu__search-button').css('color', '#004996');
-      $('.mobile-menu button.et_pb_menu__search-button ').css('border', '#004996 solid 1px');
+      $('.mobile-menu button.et_pb_menu__search-button ').css({'border': '#004996 solid 1px', 'color': '#004996'});
       $('#page-container .mobile-menu').css('background-color', '#fff');
     }
   }
 });
-
 
 
 

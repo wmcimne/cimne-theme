@@ -1,157 +1,66 @@
-/*
-
-Menu pantalla de escritorio
-
-*/
-
 jQuery(function($){
-  $(document).ready(function(){
 
+  /*--------------------------------------------------------------
+    Menu pantalla de escritorio
+  ----------------------------------------------------------------*/
+
+  $(function() {
+    //
     // Inserta los dropdowns creados a los items del menú primer nivel
-    $('.dropdown-menu').each(function(i){
-        
+    $('.dropdown-menu').each(function (i) {
       i = i + 1;
-      
-      var $dropdown = $('.dropdown-menu-' + i);
-      var $mainMenuItem = $('.first-level-' + i + '>a');
+      let $dropdown = $('.dropdown-menu-' + i);
+      let $mainMenuItem = $('.first-level-' + i + '>a');
+
       $dropdown.insertAfter($mainMenuItem);
-      
-    });  
-      
+    });
 
-    // controla que valores css asignar a la barra de menú
-    if ( $('body').hasClass('home') ) {
-      homeNoHoverParams();
-      $('#main-bar').hover( () => homeHoverParams() , () => homeNoHoverParams() );
-    }else{
-      console.log(window.scrollY);
-      $('#main-bar').hover( () => noHomeHoverParams(), () => noHomeNoHoverParams() );
+    // On hover behaviour - controla que valores css asignar a la barra de menú
+    if ($('body').hasClass('home')) {
+      onHoverBehaviour.homeNoHoverParams();
+      $('.et-menu-nav li').hover(() => onHoverBehaviour.homeHoverParams(), () => onHoverBehaviour.homeNoHoverParams());
+      $('#main-bar').hover(() => onHoverBehaviour.homeHoverParams(), () => onHoverBehaviour.homeNoHoverParams());
+    } else {
+      $('.et-menu-nav li').hover(() => onHoverBehaviour.noHomeHoverParams(), () => onHoverBehaviour.noHomeNoHoverParams());
+      $('#main-bar').hover(() => onHoverBehaviour.noHomeHoverParams(), () => onHoverBehaviour.noHomeNoHoverParams());
     }
-    
-    // Controla la ocultación de la barra superior del menú y la posición de los dropdowns al hacer scroll
 
- 
-    
-    window.onscroll = function() {
-
-      let el = document.querySelector('#top-bar');
-      let coords = el.getBoundingClientRect();
-
-      console.log("element top: " + coords.top);
-
-      let dropdownsTopPosition = 144+coords.top +'px';
-
-      console.log("dropdownsTopPosition: " + dropdownsTopPosition);
-
-      let currentScrollPos = window.window.scrollY;
-      let topBarHeight = document.getElementById('top-bar').offsetHeight;
-      let submenuTabHeight = document.querySelector('.dropdown-menu').offsetHeight;
-      console.log(submenuTabHeight);
+    // Position behaviour - Controla la ocultación de la barra superior del menú y la posición de los dropdowns al hacer scroll  
+    window.onscroll = function () {
       const dropdowns = document.querySelectorAll('.dropdown-menu');
-
-      for (let i = 0; i < dropdowns.length; i++) {
-        dropdowns[i].style.top = dropdownsTopPosition;
-      }
-
-      // if (currentScrollPos > topBarHeight) {
-      //   document.getElementById('top-bar').style.display = 'none';
-      //   document.getElementById('main-bar').style.top = '0px';
-      //   for (let i = 0; i < dropdowns.length; i++) {
-      //     dropdowns[i].style.top = '104px';
-      //   }
-      // } else {
-      //   document.getElementById('top-bar').style.display = 'block';
-      //   document.getElementById('main-bar').style.top = '40px';
-      //   for (let i = 0; i < dropdowns.length; i++) {
-      //       //dropdowns[i].style.top = '144px';
-      //       dropdowns[i].style.top = dropdownsTopPosition;
-      //   }
-      // }
+      $('body').hasClass('home') ? homePositionParams(dropdowns) : noHomePositionParams(dropdowns);
     }
   });
-});
 
-/*  Funciones Auxiliares:   */
-// valores css de la barra de menú en función de si is home / is hover 
-const homeHoverParams = () => {
-  // $('body').css('overflow-y' , 'clip');
-  console.log('HOME HOVER');
-  $('#main-bar').css('background-color', '#004996');
-}
-const homeNoHoverParams = () => {
-  // $('body').css('overflow-y' , 'scroll');
-  console.log('HOME NO HOVER');
-  $('#main-bar').css('position', 'relative');
-  $('#main-bar').css('background-color', 'transparent');
-  $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
-  $('#menu-main-right li a').css({ 'border-color': '#fff', 'color': '#fff' });
-  $('.category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#fff', 'color': '#fff' });
-}
-const noHomeHoverParams = () => {
-  
-  console.log('NO HOME HOVER');
-  $('#main-bar').css('background-color', '#004996');
-  $('.category-menu-left li.first-level>a').css('color', '#fff');
-  $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
-  $('#menu-main-right li a').css({ 'border-color': '#fff', 'color': '#fff' });
-  $('.category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#fff', 'color': '#fff' });
-}
-const noHomeNoHoverParams = () => {
-  console.log('NO HOME NO HOVER');
-  $('#main-bar').css('background-color', '#fff');
-  $('.category-menu-left li.first-level>a').css('color', '#004996');
-  $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-color-cimne-web.png');
-  $('#menu-main-right li a').css({ 'border-color': '#02A0A5', 'color': '#02A0A5' });
-  $('.category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#004996', 'color': '#004996' });
-}
 
-const menuBarBeahavior = () => {
-  
-}
+ /*--------------------------------------------------------------
+    Menu pantalla mobile
+  ----------------------------------------------------------------*/
 
-/*
+  $(function() {
 
- Mobile menu
+    let index, arrowElement;
 
-*/
-
-jQuery(function($){
-  $(document).ready(function() {
-
-    // Obtén todos los elementos flecha de menú
-    let  index, classNameList, arrowClassName, classText;
-
-    // Agrega un evento de clic a cada elemento de menú
-    $('li[class*="-arrow-"]').click(function(event) {
+    // Muestra el submenú con efecto desplazamiento lateral
+    $('li[class*="-arrow-"]').click(function (event) {
       event.preventDefault(); // parece que hay dos clics en el mismo item de la lista y da un error de jq. Investigar como elimiar el click by default
-
       // Mantiene el menú 1er nivel visible
       $('.mobile_menu_bar').click();
 
-      // Obtén el índice del elemento de menú clicado
-      classNameList = $( this ).attr('class');
-      arrowClassName = classNameList.split(' ');
-      console.log(`classnamelist: ${classNameList} - arrowclassname: ${arrowClassName}`);
-      for ( value of arrowClassName ) {
-        if (value.includes('-arrow-')) { 
-          classText = value.split('-');
-          index = classText[classText.length - 1];
-        }
-      }
-
-      // Muestra la pestaña con efecto desplazamiento lateral correspondiente al índice del elemento de menú clicado
-      $('.content-tab').eq(index).animate({ left: "0px", top: "80px"});
+      arrowElement = event.target.parentNode.parentNode;
+      index = getStringInClassNameList(arrowElement, '-arrow-');
+      $('.content-tab').eq(index).animate({ left: "0px", top: "80px" });
     });
 
     // Oculta el submenú con efecto desplazamiento lateral
-    $('.submenu-arrow').click(function() {
-      $('.content-tab').eq(index).animate({ left: "1000px", top: "80px"});
+    $('.submenu-arrow').click(function () {
+      $('.content-tab').eq(index).animate({ left: "1000px", top: "80px" });
     });
-    $('.mobile_menu_bar').click(function() {
-      $('.content-tab').eq(index).animate({ left: "1000px", top: "80px"});
+    $('.mobile_menu_bar').click(function () {
+      $('.content-tab').eq(index).animate({ left: "1000px", top: "80px" });
     });
 
-    // método que dispa un evento cuando se cambia la clase de un elemento usando jQuery
+    // Método que dispa un evento cuando se cambia la clase de un elemento usando jQuery
     $.fn.onClassChange = function (cb) {
       return $(this).each((_, el) => {
         new MutationObserver(mutations => {
@@ -169,142 +78,259 @@ jQuery(function($){
       let isHome = $('body').hasClass('home');
       let isOpened = newClass.includes('opened');
 
-      (isHome && isOpened) ? isHomeIsOpen() : (isHome && !isOpened) ? isHomeIsNotOpen() : (!isHome && isOpened) ? isNotHomeIsOpen() : (!isHome && !isOpened) ? isNotHomeIsNotOpen() : null;
-      
+      (isHome && isOpened) ? mobileTabsBehaviour.isHomeIsOpen() :
+        (isHome && !isOpened) ? mobileTabsBehaviour.isHomeIsNotOpen() :
+          (!isHome && isOpened) ? mobileTabsBehaviour.isNotHomeIsOpen() :
+            (!isHome && !isOpened) ? mobileTabsBehaviour.isNotHomeIsNotOpen() :
+              null;
     });
   });
-});
 
-/*  Funciones Auxiliares:   */
-// Update Mobile Menu Styles Features
- const isHomeIsOpen = () => {
-  //console.log(`.mobile_nav at homepage had its class updated to: ${newClass}`);
 
-    $('.mobile-menu').css('position', 'fixed');
-    $('#mobile-menu-container').css('background-color' , '#004996');
-    $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
-    $('.et_pb_fullwidth_menu_0_tb_header .et_pb_menu__icon.et_pb_menu__search-button').css('color', '#fff');
-    $('.mobile-menu button.et_pb_menu__search-button ').css('border', '#fff solid 1px');
-    $('.mobile_nav.opened .mobile_menu_bar::before').css('color', '#fff');
-    $('#page-container .mobile-menu').css('background-color' , '#004996');
-}
-const isHomeIsNotOpen = () => {
-  //console.log(`.mobile_nav at homepage had its class updated to: ${newClass}`);
 
-    $('.mobile-menu').css('position', 'relative');
-    $('#mobile-menu-container').css('background-color' , 'transparent');
-    $('#page-container .mobile-menu').css('background-color' , 'transparent');
-}
-const isNotHomeIsOpen = () => {
-  //console.log(`.mobile_nav had its class updated to: ${newClass}`);
-
-    $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
-    $('.et_pb_fullwidth_menu_0_tb_header .et_pb_menu__icon.et_pb_menu__search-button').css('color', '#fff');
-    $('.mobile-menu button.et_pb_menu__search-button ').css('border', '#fff solid 1px');
-    $('.mobile_nav.opened .mobile_menu_bar::before').css('color', '#fff');
-    $('#page-container .mobile-menu').css('background-color' , '#004996'); 
-}
-const isNotHomeIsNotOpen = () => {
-  //console.log(`.mobile_nav had its class updated to: ${newClass}`);
-
-    $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-color-cimne-web.png');
-    $('.et_pb_fullwidth_menu_0_tb_header .et_pb_menu__icon.et_pb_menu__search-button').css('color', '#004996');
-    $('.mobile-menu button.et_pb_menu__search-button ').css('border', '#004996 solid 1px');
-    $('#page-container .mobile-menu').css('background-color' , '#fff');
-}
-
-/*
-
-  Nav tabs: Controla un sistema de tabs en lugar de usar el módulo tabs de DIVI.
-
-  xxx-nav-item-n: id of the item
-  xxx-nav-tab-n: id of the tab
-
-  Where:
-
-  -xxx: name of the Nav tabs
-  -nav-item: menu nav item
-  -nav-tab: menu nav tab
-  -n: number of the item/tab
-
-*/
-jQuery(document).ready(function($) {
+  /*--------------------------------------------------------------
+    Nav tabs: Controla un sistema de tabs
+  ----------------------------------------------------------------
+    Para no usar DIVI tabs module
   
-  $('[id$="nav-item-1"]').addClass('nav-item-active');
-  $('[id$="nav-tab-1"]').addClass('show-nav-tab');
-  $('[id*="nav-tab"]').not('[id$="nav-tab-1"]').addClass('hide-nav-tab');
+    -xxx-nav-item-n: id of the item
+    -xxx-nav-tab-n: id of the tab
+  
+    Where:
+  
+    -xxx: name of the Nav tabs
+    -nav-item: menu nav item
+    -nav-tab: menu nav tab
+    -n: number of the item/tab
+  
+  */
 
-  $('[id*="nav-item"]').click(function() {
+  $(function() {
+    $('[id$="nav-item-1"]').addClass('nav-item-active');
+    $('[id$="nav-tab-1"]').addClass('show-nav-tab');
+    $('[id*="nav-tab"]').not('[id$="nav-tab-1"]').addClass('hide-nav-tab');
+    const stringPositionRemovingItemPlusNumber = -7;
 
-        console.log($(this));
-        var selector=$(this).attr('id').replace('item', 'tab');
-        var clusterSelect =$('#' + selector);
-        var tabNameSelected = $(this).attr('id').slice(0, -7);
-        console.log(tabNameSelected);
-        
-        $('[id*="'+tabNameSelected+'-tab"]').removeClass('show-nav-tab');
-        $('[id*="'+tabNameSelected+'-tab"]').addClass('hide-nav-tab');
-        clusterSelect.addClass('show-nav-tab');
-        $('[id*="'+tabNameSelected+'-item"]').removeClass('nav-item-active');
-        $(this).addClass('nav-item-active');
+    $('[id*="nav-item"]').click(function () {
 
-    })
-});
+      let selector = $(this).attr('id').replace('item', 'tab');
+      let clusterSelect = $('#' + selector);
+      let tabNameSelected = $(this).attr('id').slice(0, stringPositionRemovingItemPlusNumber);
 
+      $('[id*="' + tabNameSelected + '-tab"]').removeClass('show-nav-tab');
+      $('[id*="' + tabNameSelected + '-tab"]').addClass('hide-nav-tab');
+      clusterSelect.addClass('show-nav-tab');
+      $('[id*="' + tabNameSelected + '-item"]').removeClass('nav-item-active');
+      $(this).addClass('nav-item-active');
 
-
-/*
-
-  Formas y efectos en imagenes
-
-*/
-
-jQuery(function($){
-  $(document).ready(function() {
-
-      !!document.querySelector('.img-square-container') ? addSquareFormToImg() : null;
-      !!document.querySelector('#section-news') ? addRectangleFormToImg() : null;
+    });
   });
-});
 
-/*  Funciones Auxiliares:   */
-const addRectangleFormToImg = () => {
 
-  let container = document.querySelector('#section-news');
-  let article = container.querySelectorAll('article');
-  let category, image;
+  /*------------------------------------------------------------------------------
+    Gestiona la visibilidad de las secciones de proyectos. Navegación y filtrado
 
-  console.log(article);
+    *Adaptar a otras listas como publicaciones, etc
+  -------------------------------------------------------------------------------*/
+  
+  let projectItems =  document.getElementById('project-items');
 
-  article.forEach(function(element) {
-    console.log(element);
-    category = getStringInClassNameList(element, 'tag');
-    console.log(category);
-    image = element.querySelector('img');
-    console.log(image);
-    $(image).before('<div class="rectangle"><span class="rectangle-text">' + category +'</span></div>');
+  if (document.body.contains(projectItems)) {
     
+    const allProjectItems = document.querySelectorAll('.projects-nav-item');
+
+
+    projectItems.addEventListener('click', (event) => {
+
+      if (event.target.closest('#ongoing-projects-item') && !event.target.closest('#ongoing-projects-item').classList.contains('nav-item-active')) {
+
+        allProjectItems.forEach(tab => tab.classList.toggle('nav-item-active'));
+        document.documentElement.style.setProperty('--display-ongoing-projects', 'block');
+        document.documentElement.style.setProperty('--display-finished-projects', 'none');
+      }
+      if (event.target.closest("#finished-projects-item") && !event.target.closest('#finished-projects-item').classList.contains('nav-item-active')) {
+
+        allProjectItems.forEach(tab => tab.classList.toggle('nav-item-active'));
+        document.documentElement.style.setProperty('--display-ongoing-projects', 'none');
+        document.documentElement.style.setProperty('--display-finished-projects', 'block');
+      }
+    });
+  } else {
+    console.log('projectItems not found');
+  }
+
+  /*--------------------------------------------------------------
+    Formas y efectos en imagenes
+  ----------------------------------------------------------------*/
+
+  $(function() {
+    !!document.querySelector('.img-square-container') ? addSquareFormToImg() : null;
+    !!document.querySelector('#section-news') ? addRectangleFormToImg() : null;
   });
-}
 
-const addSquareFormToImg = () => {
-  $('.img-square-container.square-form-cross img').after('<img src="http://cimne.local/wp-content/uploads/2024/09/square-turquoise-cross-desktop.png" alt="square-cross-form" class="square-form-img">');
-  $('.img-square-container.square-form-arrow-left.blue img').after('<img src="http://cimne.local/wp-content/uploads/2024/09/square-blue-arrow-right-desktop.png" alt="square-arrow-form" class="square-form-img">');
-  $('.img-square-container.square-form-arrow-left.turquoise img').after('<img src="http://cimne.local/wp-content/uploads/2024/09/square-turquoise-arrow-right-desktop.png" alt="square-arrow-form" class="square-form-img">');
+  const addRectangleFormToImg = () => {
 
-}
+    console.log('addRectangleFormToImg');
 
-const getStringInClassNameList = (element, keyWord) => {
+    let container = document.querySelector('#section-news');
+    let article = container.querySelectorAll('article');
+    let category, image;
 
-  let classNameList = element.className.split(' ');
-  let catchedString = '';
-  for ( value of classNameList ) {
-    if (value.includes(keyWord)) { 
-      classText = value.split('-');
-      catchedString = classText[classText.length - 1];
-      //console.log(catchedString);
+    article.forEach(function (element) {
+      category = getStringInClassNameList(element, 'tag');
+      image = element.querySelector('img');
+      $(image).before('<div class="rectangle"><span class="rectangle-text">' + category + '</span></div>');
+    });
+  }
+
+  const addSquareFormToImg = () => {
+    console.log('addSquareFormToImg');
+
+    $('.img-square-container.square-form-cross img').after('<img src="http://cimne.local/wp-content/uploads/2024/09/square-turquoise-cross-desktop.png" alt="square-cross-form" class="square-form-img">');
+    $('.img-square-container.square-form-arrow-left.blue img').after('<img src="http://cimne.local/wp-content/uploads/2024/09/square-blue-arrow-right-desktop.png" alt="square-arrow-form" class="square-form-img">');
+    $('.img-square-container.square-form-arrow-left.turquoise img').after('<img src="http://cimne.local/wp-content/uploads/2024/09/square-turquoise-arrow-right-desktop.png" alt="square-arrow-form" class="square-form-img">');
+  }
+
+  const getStringInClassNameList = (element, keyWord) => {
+
+    console.log(`getStringInClassNameList: ${element} keyword: ${keyWord}`);
+
+    let classNameList = element.className.split(' ');
+    let catchedString = '';
+    console.log('Language is: ' + document.documentElement.lang);
+
+    for (value of classNameList) {
+      
+      if (value.includes(keyWord)) {
+        classText = value.split('-');
+        // console.log(`value: ${value} - classNameList: ${classNameList} - classText: ${classText}`);
+        // console.log('-1: ' + classText[classText.length - 1]);
+        // console.log('-2: ' + classText[classText.length - 2]);
+        
+        document.documentElement.lang.includes('en') ?  catchedString = classText[classText.length - 1] : catchedString = classText[classText.length - 2];
+        //catchedString = classText[classText.length - 1];
+        console.log(`catchedString: ${catchedString}`);
+      }
+    }
+    
+    return catchedString;
+  }
+
+
+  /*--------------------------------------------------------------
+    Funciones Auxiliares
+  ----------------------------------------------------------------*/
+  
+  // posición y comportamiento de la barra y dropdowns en función de si es home o no 
+  const homePositionParams = (dropdowns) => {
+
+    console.log('homePositionParams');
+
+    let topBar = document.getElementById('top-bar');
+    let mainBar = document.getElementById('main-bar');
+    let coords = topBar.getBoundingClientRect();
+    let topBarHeight = topBar.offsetHeight;
+    let mainBarHeight = mainBar.offsetHeight;
+    let dropdownsTopPosition = topBarHeight + mainBarHeight + coords.top + 'px';
+
+    dropdowns.forEach((element) => {
+      element.style.top = dropdownsTopPosition;
+    })
+  }
+
+  const noHomePositionParams = (dropdowns) => {
+
+    console.log('noHomePositionParams');
+
+    let topBar = document.getElementById('top-bar');
+    let mainBar = document.getElementById('main-bar');
+    let currentScrollPos = window.window.scrollY;
+    let topBarHeight = topBar.offsetHeight;
+    let mainBarTopPosition = "";
+
+    if (currentScrollPos > topBarHeight) {
+      topBar.style.display = 'none';
+      mainBar.style.top = '0px';
+      mainBarTopPosition = '104px';
+    } else {
+      topBar.style.display = 'block';
+      mainBar.style.top = '40px';
+      mainBarTopPosition = '144px';
+    }
+    dropdowns.forEach((element) => {
+      element.style.top = mainBarTopPosition;
+    })
+  }
+  
+
+  // valores css de la barra de menú en función de si es home / es hover 
+  const onHoverBehaviour = {
+    homeHoverParams: () => {
+      console.log('onHoverBehaviour: homeHoverParams');
+
+      $('#main-bar').css('background-color', '#004996');
+    },
+    homeNoHoverParams: () => {
+      console.log('onHoverBehaviour: homeNoHoverParams');
+
+      $('#main-bar').css('background-color', 'transparent');
+      $('[id^="menu-main-right"] li a').css({ 'border-color': '#fff', 'color': '#fff' });
+      $('#main-bar button.et_pb_menu__search-button').css({ 'border-color': '#fff', 'color': '#fff' });
+    },
+    noHomeHoverParams: () => {
+      console.log('onHoverBehaviour: noHomeHoverParams');
+
+      $('#main-bar').css('background-color', '#004996');
+      $('.category-menu-left li.first-level>a').css('color', '#fff');
+      $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
+      $('[id^="menu-main-right"] li a, .category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#fff', 'color': '#fff' });
+  
+    },
+    noHomeNoHoverParams: () => {
+      console.log('onHoverBehaviour: noHomeNoHoverParams');
+
+      $('#main-bar').css('background-color', '#fff');
+      $('.category-menu-left li.first-level>a').css('color', '#004996');
+      $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-color-cimne-web.png');
+      $('[id^="menu-main-right"] li a, .category-menu-right button.et_pb_menu__search-button').css({ 'border-color': '#02A0A5', 'color': '#02A0A5' });
+
     }
   }
-  return catchedString;
-}
+  
+  // Update Mobile Menu Styles Features
+  const mobileTabsBehaviour = {
+
+  
+
+    isHomeIsOpen: () => {
+      console.log('mobileTabsBehaviour: isHomeIsOpen');
+      
+      $('#page-container .mobile-menu').css({'position' : 'fixed', 'background-color': '#004996'});
+    },
+    isHomeIsNotOpen: () => {
+      console.log('mobileTabsBehaviour: isHomeIsNotOpen');
+
+      $('#page-container .mobile-menu').css({'position' : 'relative','background-color': 'transparent'});
+    },
+    isNotHomeIsOpen: () => {
+      console.log('mobileTabsBehaviour: isNotHomeIsOpen');
+
+      $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-blanco-cimne-web.png');
+      $('.mobile-menu button.et_pb_menu__search-button ').css({'border': '#fff solid 1px', 'color': '#fff'});
+      $('#page-container .mobile-menu').css('background-color', '#004996');
+    },
+    isNotHomeIsNotOpen: () => {
+      console.log('mobileTabsBehaviour: isNotHomeIsNotOpen');
+
+      $('.et_pb_menu__logo img').attr('src', 'http://cimne.local/wp-content/uploads/2024/09/logo-color-cimne-web.png');
+      $('.mobile-menu button.et_pb_menu__search-button ').css({'border': '#004996 solid 1px', 'color': '#004996'});
+      $('#page-container .mobile-menu').css('background-color', '#fff');
+    }
+  }
+});
+
+
+
+
+
 
